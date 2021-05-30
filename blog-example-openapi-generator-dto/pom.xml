@@ -18,6 +18,81 @@
             <artifactId>blog-example-common-domain</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.12.3</version>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>1.6.2</version>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+            <version>1.3.5</version>
+            <optional>true</optional>
+        </dependency>
+
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>5.1.0</version>
+                <configuration>
+                    <generatorName>jaxrs-spec</generatorName>
+                    <modelNameSuffix>Dto</modelNameSuffix>
+                    <generateApis>false</generateApis>
+                    <generateModelDocumentation>false</generateModelDocumentation>
+                    <generateSupportingFiles>false</generateSupportingFiles>
+                    <generateModelTests>false</generateModelTests>
+                    <configOptions>
+                        <hideGenerationTimestamp>true</hideGenerationTimestamp>
+                        <useBeanValidation>false</useBeanValidation>
+                        <sourceFolder>java</sourceFolder>
+                    </configOptions>
+                </configuration>
+
+                <executions>
+
+                    <execution>
+                        <id>generate-users</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${basedir}/openapi/users.yaml</inputSpec>
+                            <modelPackage>cz.zvestov.blog.example.dto.user</modelPackage>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>generate-pets</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${basedir}/openapi/pets.yaml</inputSpec>
+                            <modelPackage>cz.zvestov.blog.example.dto.pet</modelPackage>
+                            <importMappings>
+                                <importMapping>User=cz.zvestov.blog.example.dto.user.UserDto</importMapping>
+                            </importMappings>
+                        </configuration>
+                    </execution>
+
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
 
 </project>
