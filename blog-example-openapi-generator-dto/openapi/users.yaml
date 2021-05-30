@@ -43,3 +43,15 @@ components:
         name:
           type: string
           example: doggie
+
+    Address:
+      required:
+        - street
+        - postCode
+      type: object
+      properties:
+        street:
+          type: string
+        postCode:
+          type: string
+          pattern: \d{3} \d{2}

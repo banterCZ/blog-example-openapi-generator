@@ -58,6 +58,7 @@
                     <configOptions>
                         <hideGenerationTimestamp>true</hideGenerationTimestamp>
                         <useBeanValidation>false</useBeanValidation>
+                        <!-- default value is src/main/java -->
                         <sourceFolder>java</sourceFolder>
                     </configOptions>
                 </configuration>
@@ -72,6 +73,9 @@
                         <configuration>
                             <inputSpec>${basedir}/openapi/users.yaml</inputSpec>
                             <modelPackage>cz.zvestov.blog.example.dto.user</modelPackage>
+                            <importMappings>
+                                <importMapping>Address=cz.zvestov.blog.example.common.domain.AddressDto</importMapping>
+                            </importMappings>
                         </configuration>
                     </execution>
 
